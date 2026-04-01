@@ -1,0 +1,13 @@
+<h2>Recipes</h2>
+
+@if (recipes$ | async; as recipes){
+    <p> Recipes Length {{recipes.length}}</p>
+        <ul>
+            @for (recipe of recipes; track recipe.id ?? $index){
+                <li>
+                    <strong> {{recipe.title }}</strong>
+                </li>
+            }
+        </ul>
+}
+
