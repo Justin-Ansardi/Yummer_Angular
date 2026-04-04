@@ -1,6 +1,11 @@
 <div style="max-width: 800px; margin: 0 auto;">
 <h1> Welcome to Yummer, The dumber recipe app</h1>
-<app-recipe-list></app-recipe-list>
+
+<div class="container">
+    <app-recipe-filter class="col-3"></app-recipe-filter>
+    <app-recipe-list class="col-9"></app-recipe-list>
+</div>
+
 </div>
 
 <router-outlet />

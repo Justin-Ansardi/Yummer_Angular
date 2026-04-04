@@ -1,13 +1,21 @@
+
+
+
 <h2>Recipes</h2>
 
 @if (recipes$ | async; as recipes){
-    <p> Recipes Length {{recipes.length}}</p>
-        <ul>
+    <div class="container"> 
+            <p> Recipes Length {{recipes.length}}</p>
+        <div class = "row">
             @for (recipe of recipes; track recipe.id ?? $index){
-                <li>
-                    <strong> {{recipe.title }}</strong>
-                </li>
+                <ul class="card col">
+                    <li> {{recipe.title }}</li>
+                    <li> Cooking Time: {{recipe.cookingTime }}</li>
+                    
+                </ul>
             }
-        </ul>
+        </div>
+    </div>
+
 }
 
