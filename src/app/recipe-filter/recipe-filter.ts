@@ -23,11 +23,11 @@ tags: '',
     id: 0
   });
 
+
   constructor(private service: RecipeService) {}
 
-  
   filterResults() {
-    // this.service.updateFilter(<Recipe>this.recipeForm.value);
+    this.service.updateFilter(<Recipe>this.recipeForm.value);
   }
 
   clearFilters() {

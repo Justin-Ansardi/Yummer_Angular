@@ -1,9 +1,6 @@
-
-
-
 <h2>Recipes</h2>
 
-@if (recipes$ | async; as recipes){
+@if (filteredRecipes$ ?? recipes$ | async; as recipes){
     <div class="container"> 
             <p> Recipes Length {{recipes.length}}</p>
         <div class = "row">
@@ -11,11 +8,8 @@
                 <ul class="card col">
                     <li> {{recipe.title }}</li>
                     <li> Cooking Time: {{recipe.cookingTime }}</li>
-                    
                 </ul>
             }
         </div>
     </div>
-
 }
-

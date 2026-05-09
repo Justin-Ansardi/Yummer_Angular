@@ -2,7 +2,7 @@ import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../recipes/recipe-service';
 import { Recipe } from '../recipes/recipe';
-import { Observable, tap, combineLatest, map  } from 'rxjs';
+import { Observable, tap, combineLatest, map, filter  } from 'rxjs';
 import { DataViewModule } from 'primeng/dataview';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
@@ -34,8 +34,21 @@ import { FormBuilder, FormsModule } from '@angular/forms';
 export class RecipeList{
   private recipeService = inject(RecipeService);
 
-  recipes$: Observable<Recipe[]> = this.recipeService.getRecipes()
-            .pipe(tap(x => console.log(x))); // debugging
+  recipes$: Observable<Recipe[]> = this.recipeService.getRecipes();
+
+  filterRecipesAction$ = this.recipeService.filterRecipesAction$;
+
+    filteredRecipes$ = combineLatest([this.recipes$, this.filterRecipesAction$])
+              .pipe(
+                map(([recipes, filter]: [Recipe[], Recipe]) => {
+                  const filterTitle = filter?.title?.toLowerCase() ?? '';
+                  
+
+                  return recipes.filter(recipe => recipe.title?.toLowerCase()
+                                                               .includes(filterTitle))  
+                  })
+                );
+
 
   constructor(private service: RecipeService, private fb: FormBuilder){}
 }
