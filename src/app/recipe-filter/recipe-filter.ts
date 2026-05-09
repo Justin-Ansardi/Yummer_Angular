@@ -32,6 +32,7 @@ tags: '',
 
   clearFilters() {
     this.recipeForm.reset();
+    this.filterResults();
   }
 }
 
