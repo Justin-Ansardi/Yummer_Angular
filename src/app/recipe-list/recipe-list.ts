@@ -33,11 +33,10 @@ import { FormBuilder, FormsModule } from '@angular/forms';
 
 export class RecipeList{
   private recipeService = inject(RecipeService);
-
+  
   constructor(private service: RecipeService, private fb: FormBuilder){}
 
   recipes$: Observable<Recipe[]> = this.recipeService.getRecipes();
-
   filterRecipesAction$ = this.recipeService.filterRecipesAction$;
 
      // Helper Functions
