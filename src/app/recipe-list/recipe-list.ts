@@ -34,21 +34,28 @@ import { FormBuilder, FormsModule } from '@angular/forms';
 export class RecipeList{
   private recipeService = inject(RecipeService);
 
+  constructor(private service: RecipeService, private fb: FormBuilder){}
+
   recipes$: Observable<Recipe[]> = this.recipeService.getRecipes();
 
   filterRecipesAction$ = this.recipeService.filterRecipesAction$;
 
+     // Helper Functions
+    filterRecipesByFormInput = (recipes: Recipe[] , filter: Recipe): Recipe[] => {
+       const filterTitle = filter?.title?.toLowerCase() ?? '';
+       return recipes.filter(recipe => recipe.title?.toLowerCase()
+                                                               .includes(filterTitle)) 
+     };
+     //End Helper Functions
+
     filteredRecipes$ = combineLatest([this.recipes$, this.filterRecipesAction$])
               .pipe(
-                map(([recipes, filter]: [Recipe[], Recipe]) => {
-                  const filterTitle = filter?.title?.toLowerCase() ?? '';
-                  
+                map(([recipes, filter]: [Recipe[], Recipe]) => 
+                   this.filterRecipesByFormInput(recipes,filter)
+                ));
+    }
 
-                  return recipes.filter(recipe => recipe.title?.toLowerCase()
-                                                               .includes(filterTitle))  
-                  })
-                );
+ 
+    
+    
 
-
-  constructor(private service: RecipeService, private fb: FormBuilder){}
-}
