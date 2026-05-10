@@ -11,7 +11,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { RecipeService } from '../recipes/recipe-service';
+import { Recipe } from '../recipes/recipe';
+ 
 @Component({
   selector: 'app-recipe-creation',
   standalone: true,
@@ -22,27 +24,34 @@ import { CommonModule } from '@angular/common';
 export class RecipeCreation implements OnInit {
   recipeForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private service:RecipeService) {}
 
+  //Imperative pattern
   ngOnInit(): void {
     this.recipeForm = this.fb.group({
-      id: [null, Validators.required],
-      title: ['', Validators.required],
+      id: [0],
+      title: ['', ],
       ingredients: [null],
       tags: [null],
       imageUrl: [null],
-      cookingTime: [null, [Validators.required, Validators.min(1)]],
+      cookingTime: [0],
       yeild: [null],
       steps: [null],
-      rating: [null, [Validators.min(0), Validators.max(5)]]
-    });
+      rating: [null]
+    })
+    // this.recipeForm.valueChanges.subscribe(
+    //   formValue => {
+    //     this.service.saveRecipe(formValue as Recipe);
+    //   }
+      
+   // )
+    ;
   }
 
   // lets remove the validation for now
   onSubmit(): void {
-    if (this.recipeForm.valid) {
       console.log('Recipe Data Submitted:', this.recipeForm.value);
-      // To send to your API: this.yourService.createRecipe(this.recipeForm.value).subscribe();
-    }
+      this.service.saveRecipe(this.recipeForm.value);
+      
   }
 }
