@@ -23,4 +23,8 @@ export class RecipeService {
     this.filterRecipesSubject.next(criteria);
 
   }
+
+   saveRecipe(formValue: Recipe): Observable<Recipe>{
+    return this.http.post<Recipe>(this.apiUrl, formValue);
+  }
 }

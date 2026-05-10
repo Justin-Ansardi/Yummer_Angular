@@ -1,0 +1,38 @@
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="recipe-form">
+  <div>
+    <label>Title*</label>
+    <input type="text" formControlName="title">
+  </div>
+
+  <div>
+    <label>Ingredients</label>
+    <textarea formControlName="ingredients"></textarea>
+  </div>
+
+  <div>
+    <label>Image URL</label>
+    <input type="url" formControlName="imageUrl">
+  </div>
+
+  <div>
+    <label>Cooking Time (min)*</label>
+    <input type="number" formControlName="cookingTime">
+  </div>
+
+  <div>
+    <label>Yield (servings)</label>
+    <input type="number" formControlName="yeild">
+  </div>
+
+  <div>
+    <label>Steps</label>
+    <textarea formControlName="steps"></textarea>
+  </div>
+
+  <div>
+    <label>Rating (0-5)</label>
+    <input type="number" formControlName="rating" min="0" max="5">
+  </div>
+
+  <button type="submit" [disabled]="!recipeForm.valid">Post Recipe</button>
+</form>
