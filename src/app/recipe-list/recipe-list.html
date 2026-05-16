@@ -1,5 +1,7 @@
 <h2>Recipes</h2>
 
+<app-recipe-filter class="col-3"></app-recipe-filter>
+
 @if (filteredRecipes$ ?? recipes$ | async; as recipes){
     <div class="container"> 
             <p> Recipes Length {{recipes.length}}</p>

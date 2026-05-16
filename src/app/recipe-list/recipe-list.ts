@@ -12,11 +12,13 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RatingModule } from 'primeng/rating';
 import { FormBuilder, FormsModule } from '@angular/forms';
+import { RecipeFilterComponent } from '../recipe-filter/recipe-filter';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
   imports:  [CommonModule,
+    RecipeFilterComponent,
     DataViewModule,
     PanelModule,
     DialogModule,
